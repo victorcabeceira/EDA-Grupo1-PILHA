@@ -26,47 +26,17 @@ int main()
 	// Variaveis Locais
 	char expressao[20];
 	int loop = 0;
-	bool balanceado = false;
-	bool inclusao = false;
-	bool aritmetica = false;
 	
 	do{
 		system("cls");
 		printf("Este programa verifica se os parenteses de uma expressao\n");
-		printf(" aritmetica de at%c 20 caracteres foram devidamente utilizadas\n\n", 130);
+		printf("aritmetica de at%c 20 caracteres foram devidamente utilizadas\n\n", 130);
 		printf("Insira uma expressao aritmetica:\n");
 		printf("Exemplo: (3+5)*(2-7)\n");
 		scanf(" %20[^\n]", expressao);
 		system("cls");
 		printf("\nExpressao recebida: %s\n\n", expressao);
-		VerificaParenteses(expressao, balanceado, inclusao, aritmetica); // OperaLib.h
-		
-		if(aritmetica == true) // Se a expressao foi escrita de forma aritmetica
-		{
-			if(balanceado == true) // Se a quantidade de parenteses abertos e fechados estão balanceados
-			{
-				if(inclusao == true) // Se foi incluido parenteses
-					printf("Sua expressao possui parenteses devidamente balanceados!\n\n");
-				else // Se não foi incluido parenteses
-				{
-					printf("Sua expressao nao possui parenteses!\n");
-					printf("Tente novamente, agora adicionando parenteses.\n\n");
-				}
-			}
-			else // Se a quantidade de parenteses abertos e fechados não estão balanceados
-			{
-				printf("Sua expressao possui parenteses abertos!\n");
-				printf("Verifique sua expressao aritmetica e tente novamente.\n\n");
-			}
-		}
-		else // Se a expressao não foi escrita de forma aritmetica
-		{
-			printf("Sua expressao nao %c aritmetica!\n\n", 130);
-			printf("Uma expressao aritmetica deve possuir apenas\n");
-			printf("numeros, parenteses e os simbolos basicos: + - * /\n\n");
-			printf("Verifique sua expressao e tente novamente.\n\n");
-		}
-		
+		VerificaParenteses(expressao); // OperaLib.h
 		printf("\nDeseja inserir uma nova expressao aritmetica?\n");
 		printf("(1) - Sim \n(0) - Nao \n");
 		scanf("%d", &loop);

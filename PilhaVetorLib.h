@@ -3,15 +3,15 @@
  */
 
 // Função que empilha um caractere em um vetor
-char EmpilharChar (char *vetor, char simbolo, int &topo)
+char EmpilharChar (char simbolo, int &topo)
 {
-	vetor[topo] = simbolo;
 	topo++;
-	return *vetor;
+	return simbolo;
 }
 
 // Uma função que desempilha um caractere em um vetor
-void DesempilharChar (int &topo)
+char DesempilharChar (int &topo)
 {
 	topo--;
+	return ' ';
 }
