@@ -6,35 +6,56 @@
 #include "PilhaVetorLib.h"
 
 // Procedimento para Verificar o Balanceamento de parenteses de uma string
-void VerificaParenteses (char operacao[20], bool &balanceado, bool &inclusao)
+void VerificaParenteses (char expressao[20], bool &balanceado, bool &inclusao, bool &aritmetica)
 {
 	// Variaveis locais
-	char pilhaParenteses[20];
-	char parenteses;
-	int topo = 0;
-	int conta_parenteses = 0;
+	char pilhaParenteses[20],
+		 simbAritmeticas[18]= {'+','-','*','x','/','(',' ',')','0','1','2','3','4','5','6','7','8','9'},
+		 parenteses;
+	int topo = 0, conta_parenteses = 0, j=0, val_aritmetica=0;
 	
-	for(int i=0; operacao[i] != '\0'; i++) // Percorre todos os caracteres da string
+	for(int i=0; expressao[i] != '\0'; i++) // Percorre todos os caracteres da string
 	{
-		if (operacao[i] == '(') // Se encontrar um Abre-Parenteses
+		for(j=0;j<18;j++) // Percorre todos os caracteres aritmeticos
+		{
+			if(simbAritmeticas[j]==expressao[i]) // Se o caractere da string for igual a um aritmetico
+			{
+				val_aritmetica = 0;
+				break;
+			}
+			else // Se o caractere da string não for igual a um aritmetico
+				val_aritmetica++;
+		}
+		
+		if(val_aritmetica != 0) // Se não for validado a condição aritmetica da expressao
+			break;
+		
+		if (expressao[i] == '(') // Se encontrar um Abre-Parenteses
 		{
 			parenteses = '(';
 			EmpilharChar(pilhaParenteses,parenteses,topo); // PilhaVetorLib.h
 			conta_parenteses++;
 		}
-		else if(operacao[i] == ')') // Se encontrar um Fecha-Parenteses
+		else if(expressao[i] == ')') // Se encontrar um Fecha-Parenteses
 		{
 			DesempilharChar(topo); // PilhaVetorLib.h
 			conta_parenteses++;
 		}
 	}
-	if(topo == 0) // Se os parenteses estão balanceados
-		balanceado = true;
-	else // Se os parenteses não estão balanceados
-		balanceado = false;
 	
-	if(conta_parenteses == 0) // Se há parenteses
-		inclusao = false;
-	else // Se não há parenteses
-		inclusao = true;
+	if(val_aritmetica == 0) // Se for validado a condição aritmetica da expressao
+	{
+		aritmetica = true;
+		if(topo == 0) // Se os parenteses estão balanceados
+			balanceado = true;
+		else // Se os parenteses não estão balanceados
+			balanceado = false;
+	
+		if(conta_parenteses == 0) // Se há parenteses
+			inclusao = false;
+		else // Se não há parenteses
+			inclusao = true;
+	}
+	else // Se não for validado a condição aritmetica da expressao
+		aritmetica = false;
 }

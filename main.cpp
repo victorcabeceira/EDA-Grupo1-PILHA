@@ -28,6 +28,7 @@ int main()
 	int loop = 0;
 	bool balanceado = false;
 	bool inclusao = false;
+	bool aritmetica = false;
 	
 	do{
 		system("cls");
@@ -38,22 +39,32 @@ int main()
 		scanf(" %20[^\n]", expressao);
 		system("cls");
 		printf("\nExpressao recebida: %s\n\n", expressao);
-		VerificaParenteses(expressao, balanceado, inclusao); // OperaLib.h
+		VerificaParenteses(expressao, balanceado, inclusao, aritmetica); // OperaLib.h
 		
-		if(balanceado == true) // Se a quantidade de parenteses abertos e fechados estão balanceados
+		if(aritmetica == true) // Se a expressao foi escrita de forma aritmetica
 		{
-			if(inclusao == true) // Se foi incluido parenteses
-				printf("Sua expressao possui parenteses devidamente balanceados!\n\n");
-			else // Se não foi incluido parenteses
+			if(balanceado == true) // Se a quantidade de parenteses abertos e fechados estão balanceados
 			{
-				printf("Sua expressao nao possui parenteses!\n");
-				printf("Tente novamente, agora adicionando parenteses.\n\n");
+				if(inclusao == true) // Se foi incluido parenteses
+					printf("Sua expressao possui parenteses devidamente balanceados!\n\n");
+				else // Se não foi incluido parenteses
+				{
+					printf("Sua expressao nao possui parenteses!\n");
+					printf("Tente novamente, agora adicionando parenteses.\n\n");
+				}
+			}
+			else // Se a quantidade de parenteses abertos e fechados não estão balanceados
+			{
+				printf("Sua expressao possui parenteses abertos!\n");
+				printf("Verifique sua expressao aritmetica e tente novamente.\n\n");
 			}
 		}
-		else // Se a quantidade de parenteses abertos e fechados não estão balanceados
+		else // Se a expressao não foi escrita de forma aritmetica
 		{
-			printf("Sua expressao possui parenteses abertos!\n");
-			printf("Verifique sua expressao aritmetica e tente novamente.\n\n");
+			printf("Sua expressao nao %c aritmetica!\n\n", 130);
+			printf("Uma expressao aritmetica deve possuir apenas\n");
+			printf("numeros, parenteses e os simbolos basicos: + - * /\n\n");
+			printf("Verifique sua expressao e tente novamente.\n\n");
 		}
 		
 		printf("\nDeseja inserir uma nova expressao aritmetica?\n");
